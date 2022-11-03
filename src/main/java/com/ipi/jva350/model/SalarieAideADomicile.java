@@ -39,6 +39,7 @@ public class SalarieAideADomicile {
     @Column
     private LinkedHashSet<LocalDate> congesPayesPris = new LinkedHashSet<LocalDate>();
     private double joursTravaillesAnneeNMoins1= 0;
+
     private double congesPayesAcquisAnneeNMoins1= 0;
     private double congesPayesPrisAnneeNMoins1= 0;
 
