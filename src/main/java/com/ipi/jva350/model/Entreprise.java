@@ -7,6 +7,8 @@ public final class Entreprise {
 
     private static final Map<Integer, LocalDate> datePaque = new HashMap<>();
 
+    private Entreprise(){}
+
     static {
         datePaque.put(2012, LocalDate.of(2012, 4, 8));
         datePaque.put(2013, LocalDate.of(2013, 3, 31));
