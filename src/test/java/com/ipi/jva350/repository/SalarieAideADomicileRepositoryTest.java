@@ -30,4 +30,34 @@ class SalarieAideADomicileRepositoryTest {
         //Then
         Assertions.assertEquals("Jack", res.getNom());
     }
+    @Test
+    void partCongesPrisTotauxAnneeNMoins1SalarieWith2() {
+        //Given
+        SalarieAideADomicile salaireAideADomicile = new SalarieAideADomicile("Jack", LocalDate.now(), LocalDate.now(), 0, 0, 15, 1, 2);
+        //When
+        salarie.save(salaireAideADomicile);
+        Double res = salarie.partCongesPrisTotauxAnneeNMoins1();
+        //Then
+        Assertions.assertEquals(2, res);
+    }
+    @Test
+    void partCongesPrisTotauxAnneeNMoins1SalarieWith0() {
+        //Given
+        SalarieAideADomicile salaireAideADomicile = new SalarieAideADomicile("Jack", LocalDate.now(), LocalDate.now(), 0, 0, 15, 1, 0);
+        //When
+        salarie.save(salaireAideADomicile);
+        Double res = salarie.partCongesPrisTotauxAnneeNMoins1();
+        //Then
+        Assertions.assertEquals(0, res);
+    }
+    @Test
+    void partCongesPrisTotauxAnneeNMoins1SalarieWithNegatif() {
+        //Given
+        SalarieAideADomicile salaireAideADomicile = new SalarieAideADomicile("Jack", LocalDate.now(), LocalDate.now(), 0, 0, 15, 1, -1);
+        //When
+        salarie.save(salaireAideADomicile);
+        Double res = salarie.partCongesPrisTotauxAnneeNMoins1();
+        //Then
+        Assertions.assertEquals(-1, res);
+    }
 }
