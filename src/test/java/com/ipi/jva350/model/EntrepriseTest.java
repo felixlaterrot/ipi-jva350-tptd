@@ -1,3 +1,4 @@
+//Pair programming Vincent Evieux, Félix Laterrot
 package com.ipi.jva350.model;
 
 import org.junit.jupiter.api.Assertions;

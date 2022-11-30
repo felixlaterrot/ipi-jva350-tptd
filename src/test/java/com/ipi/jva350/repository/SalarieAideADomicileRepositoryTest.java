@@ -1,3 +1,4 @@
+//Pair programming Vincent Evieux, Félix Laterrot
 package com.ipi.jva350.repository;
 
 import com.ipi.jva350.exception.SalarieException;
@@ -33,18 +34,20 @@ class SalarieAideADomicileRepositoryTest {
     @Test
     void partCongesPrisTotauxAnneeNMoins1SalarieWith2() {
         //Given
-        SalarieAideADomicile salaireAideADomicile = new SalarieAideADomicile("Jack", LocalDate.now(), LocalDate.now(), 0, 0, 15, 1, 2);
+        SalarieAideADomicile salaireAideADomicile = new SalarieAideADomicile("Chris", LocalDate.now(), LocalDate.now(), 0, 0, 15, 3, 2);
         //When
+        salarie.deleteAll();
         salarie.save(salaireAideADomicile);
         Double res = salarie.partCongesPrisTotauxAnneeNMoins1();
         //Then
-        Assertions.assertEquals(2, res);
+        Assertions.assertEquals(0.6666666666666666, res);
     }
     @Test
     void partCongesPrisTotauxAnneeNMoins1SalarieWith0() {
         //Given
-        SalarieAideADomicile salaireAideADomicile = new SalarieAideADomicile("Jack", LocalDate.now(), LocalDate.now(), 0, 0, 15, 1, 0);
+        SalarieAideADomicile salaireAideADomicile = new SalarieAideADomicile("Tophe", LocalDate.now(), LocalDate.now(), 0, 0, 15, 1, 0);
         //When
+        salarie.deleteAll();
         salarie.save(salaireAideADomicile);
         Double res = salarie.partCongesPrisTotauxAnneeNMoins1();
         //Then
@@ -53,8 +56,9 @@ class SalarieAideADomicileRepositoryTest {
     @Test
     void partCongesPrisTotauxAnneeNMoins1SalarieWithNegatif() {
         //Given
-        SalarieAideADomicile salaireAideADomicile = new SalarieAideADomicile("Jack", LocalDate.now(), LocalDate.now(), 0, 0, 15, 1, -1);
+        SalarieAideADomicile salaireAideADomicile = new SalarieAideADomicile("Lamb", LocalDate.now(), LocalDate.now(), 0, 0, 15, 1, -1);
         //When
+        salarie.deleteAll();
         salarie.save(salaireAideADomicile);
         Double res = salarie.partCongesPrisTotauxAnneeNMoins1();
         //Then

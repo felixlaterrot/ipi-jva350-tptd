@@ -1,3 +1,4 @@
+//Pair programming Vincent Evieux, Félix Laterrot
 package com.ipi.jva350.service;
 
 import com.ipi.jva350.exception.SalarieException;
@@ -33,7 +34,7 @@ class SalarieAideADomicileServiceTest {
     @Test
     void calculeLimiteEntrepriseCongesPermis() {
         //GIVEN
-        //SalarieAideADomicile salaireAideADomicile = new SalarieAideADomicile("Jack", LocalDate.now(), LocalDate.now(), 0, 0, 15, 1, 2);
+        SalarieAideADomicile salaireAideADomicile = new SalarieAideADomicile("Jack", LocalDate.now(), LocalDate.now(), 30, 13, 15, 10, 2);
 
         LocalDate moisEnCours = LocalDate.now();
 
@@ -45,9 +46,11 @@ class SalarieAideADomicileServiceTest {
         //salarieAideADomicileRepository.save(salaireAideADomicile);
         //Double conges = salarieAideADomicileRepository.partCongesPrisTotauxAnneeNMoins1();
 
-        long res = salarie.calculeLimiteEntrepriseCongesPermis(moisEnCours, 1d, debut, premierJour, dernierJour);
+        Double d = salaireAideADomicile.getCongesPayesAcquisAnneeNMoins1();
+
+        long res = salarie.calculeLimiteEntrepriseCongesPermis(moisEnCours, salaireAideADomicile.getCongesPayesAcquisAnneeNMoins1(), debut, premierJour, dernierJour, salaireAideADomicile);
 
         //THEN
-        Assertions.assertEquals(20, res);
+        Assertions.assertEquals(9, res);
     }
 }

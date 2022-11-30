@@ -58,16 +58,18 @@ public class SalarieAideADomicileService {
      */
     public long calculeLimiteEntrepriseCongesPermis(LocalDate moisEnCours, double congesPayesAcquisAnneeNMoins1,
                                                       LocalDate moisDebutContrat,
-                                                      LocalDate premierJourDeConge, LocalDate dernierJourDeConge) {
+                                                      LocalDate premierJourDeConge, LocalDate dernierJourDeConge,
+                                                    SalarieAideADomicile salaireAideADomicile) {
         // proportion selon l'avancement dans l'année, pondérée avec poids plus gros sur juillet et août (20 vs 8) :
         double proportionPondereeDuConge = Math.max(Entreprise.proportionPondereeDuMois(premierJourDeConge),
                 Entreprise.proportionPondereeDuMois(dernierJourDeConge));
         double limiteConges = proportionPondereeDuConge * congesPayesAcquisAnneeNMoins1;
 
         // moyenne annuelle des congés pris :
+        salarieAideADomicileRepository.save(salaireAideADomicile);
         Double partCongesPrisTotauxAnneeNMoins1 = salarieAideADomicileRepository.partCongesPrisTotauxAnneeNMoins1();
 
-        // si la moyenne actuelle des congés pris diffère de 20% de la proportion selon l'avancement dans l'année
+        // si la moyenne actuelle des congés pris diffère de 20% de la la proportion selon l'avancement dans l'année
         // pondérée avec poids plus gros sur juillet et août (20 vs 8),
         // bonus ou malus de 20% de la différence pour aider à équilibrer la moyenne actuelle des congés pris :
         double proportionMoisEnCours = ((premierJourDeConge.getMonthValue()
@@ -139,7 +141,7 @@ public class SalarieAideADomicileService {
                 salarieAideADomicile.getMoisEnCours(),
                 salarieAideADomicile.getCongesPayesAcquisAnneeNMoins1(),
                 salarieAideADomicile.getMoisDebutContrat(),
-                jourDebut, jourFin);
+                jourDebut, jourFin, salarieAideADomicile);
         if (nbCongesPayesPrisDecomptesAnneeN < limiteEntreprise) {
             throw new SalarieException("Conges Payes Pris Decomptes (" +  nbCongesPayesPrisDecomptesAnneeN
                     + ") dépassent la limite des règles de l'entreprise : " + limiteEntreprise);
